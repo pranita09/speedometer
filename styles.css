@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5;
+}
+
+h1 {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.speedometer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.arc {
+  width: 100%;
+  height: 100%;
+  border: 5px solid transparent;
+  border-top: 5px solid #000;
+  border-left: 5px solid #000;
+  border-right: 5px solid #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.needle {
+  position: absolute;
+  width: 4px;
+  height: 145px;
+  background-color: red;
+  transform-origin: 50% 100%;
+  transition: transform 0.5s ease;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-100%) rotate(-135deg);
+}
+
+.inputContainer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+input {
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
