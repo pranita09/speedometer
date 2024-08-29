@@ -2,6 +2,7 @@ const submitBtn = document.querySelector("#submitBtn");
 const speedInput = document.querySelector("#speedInput");
 const needle = document.querySelector(".needle");
 const ticksContainer = document.getElementById("ticksContainer");
+const scaleInput = document.getElementById("scaleInput");
 
 const createTicks = () => {
   ticksContainer.innerHTML = "";
@@ -43,7 +44,7 @@ const createTicks = () => {
       transformOrigin: "0 0",
     });
 
-    // label
+    // numbers label
     const label = document.createElement("div");
     label.className = "label";
     label.textContent = i * 30;
@@ -85,21 +86,33 @@ const createTicks = () => {
   }
 };
 
-const rotateNeedle = () => {
-  const input = speedInput.value;
+const rotateNeedle = (input) => {
   const value = Math.min(Math.max(Number(input), 0), 180);
   const angle = (value - 0) * (270 / 180) - 135;
 
   needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${
-    angle + 0.35
+    angle + 0.2
   }deg)`;
 };
 
-createTicks();
+const updateFromForm = () => {
+  const input = speedInput.value;
+  scaleInput.value = input === "" ? 0 : input;
+  rotateNeedle(input);
+};
 
-submitBtn.addEventListener("click", rotateNeedle);
+const updateFromScale = () => {
+  const input = scaleInput.value;
+  speedInput.value = input;
+  rotateNeedle(input);
+};
+
+scaleInput.addEventListener("input", updateFromScale);
+submitBtn.addEventListener("click", updateFromForm);
 speedInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter") {
-    rotateNeedle();
+    updateFromForm();
   }
 });
+
+createTicks();

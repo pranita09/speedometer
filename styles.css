@@ -99,8 +99,8 @@ button:hover {
 }
 
 .small-tick {
-  height: 1px; /* Smaller height */
-  background-color: grey; /* Grey color for small ticks */
+  height: 1px;
+  background-color: grey;
 }
 
 .label {
@@ -109,4 +109,18 @@ button:hover {
   color: #000;
   transform: translate(-50%, -50%);
   user-select: none;
+}
+
+.scaleContainer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verticalScale {
+  width: 250px;
+  height: 6px;
+  margin-top: 20px;
+  cursor: pointer;
 }
