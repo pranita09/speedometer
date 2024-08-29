@@ -118,3 +118,10 @@ speedInput.addEventListener("keypress", (event) => {
 });
 
 createTicks();
+
+module.exports = {
+  createTicks,
+  rotateNeedle,
+  updateFromForm,
+  updateFromScale,
+};
