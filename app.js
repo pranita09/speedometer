@@ -9,52 +9,79 @@ const createTicks = () => {
   const totalMarks = 6;
   const startAngle = 135;
   const angleStep = 270 / totalMarks;
+  const subTickCount = 2;
+  const center = 150;
 
-  const radii = {
-    tick: 135,
-    label: 120,
-  };
+  const radiiTick = 135;
+  const radiiLabel = 120;
 
-  const center = 150; // center coordinates
+  const calculatePosition = (radius, radians) => ({
+    x: center + radius * Math.cos(radians),
+    y: center + radius * Math.sin(radians),
+  });
 
   for (let i = 0; i <= totalMarks; i++) {
     const angle = startAngle + i * angleStep;
-    const radians = (angle * Math.PI) / 180; // Pre-calculate radians
+    const radians = (angle * Math.PI) / 180;
 
-    // Calculate positions for ticks and labels
-    const tickStart = {
-      x: center + radii.tick * Math.cos(radians),
-      y: center + radii.tick * Math.sin(radians),
-    };
+    // Positions for main ticks and labels
+    const tickStart = calculatePosition(radiiTick, radians);
+    const tickEnd = calculatePosition(radiiLabel, radians);
 
-    const tickEnd = {
-      x: center + radii.label * Math.cos(radians),
-      y: center + radii.label * Math.sin(radians),
-    };
-
-    // Create tick mark
+    // main tick
     const tick = document.createElement("div");
-    tick.className = "tick";
-    tick.style.width = `${Math.hypot(
-      tickEnd.x - tickStart.x,
-      tickEnd.y - tickStart.y
-    )}px`;
-    tick.style.transform = `rotate(${angle}deg)`;
-    tick.style.left = `${tickStart.x}px`;
-    tick.style.top = `${tickStart.y}px`;
-    tick.style.position = "absolute";
-    tick.style.transformOrigin = "0 0";
+    tick.className = "tick main-tick";
+    Object.assign(tick.style, {
+      width: `${Math.hypot(
+        tickEnd.x - tickStart.x,
+        tickEnd.y - tickStart.y
+      )}px`,
+      transform: `rotate(${angle}deg)`,
+      left: `${tickStart.x}px`,
+      top: `${tickStart.y}px`,
+      position: "absolute",
+      transformOrigin: "0 0",
+    });
 
-    // Create label
+    // label
     const label = document.createElement("div");
     label.className = "label";
     label.textContent = i * 30;
-    label.style.left = `${tickEnd.x}px`;
-    label.style.top = `${tickEnd.y}px`;
-    label.style.transform = `translate(-50%, -50%)`;
+    Object.assign(label.style, {
+      left: `${tickEnd.x}px`,
+      top: `${tickEnd.y}px`,
+      transform: "translate(-50%, -50%)",
+    });
 
     ticksContainer.appendChild(tick);
     ticksContainer.appendChild(label);
+
+    // Add small ticks between main ticks
+    if (i < totalMarks) {
+      for (let j = 1; j <= subTickCount; j++) {
+        const subTickAngle = angle + j * (angleStep / (subTickCount + 1));
+        const subTickRadians = (subTickAngle * Math.PI) / 180;
+        const subTickStart = calculatePosition(radiiTick, subTickRadians);
+        const subTickEnd = calculatePosition(radiiTick - 5, subTickRadians); // Adjusted radius for small ticks
+
+        // Create small tick
+        const subTick = document.createElement("div");
+        subTick.className = "tick small-tick";
+        Object.assign(subTick.style, {
+          width: `${Math.hypot(
+            subTickEnd.x - subTickStart.x,
+            subTickEnd.y - subTickStart.y
+          )}px`,
+          transform: `rotate(${subTickAngle}deg)`,
+          left: `${subTickStart.x}px`,
+          top: `${subTickStart.y}px`,
+          position: "absolute",
+          transformOrigin: "0 0",
+        });
+
+        ticksContainer.appendChild(subTick);
+      }
+    }
   }
 };
 
@@ -64,7 +91,7 @@ const rotateNeedle = () => {
   const angle = (value - 0) * (270 / 180) - 135;
 
   needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${
-    angle + 0.3
+    angle + 0.35
   }deg)`;
 };
 
