@@ -8,11 +8,56 @@
   </head>
   <body>
     <main>
-      <h1>Speedometer</h1>
-      <div class="speedometer">
-        <div class="arc"></div>
-        <div class="needle" id="needle"></div>
-        <div class="ticks-container" id="ticksContainer"></div>
+      <h1>Speedometer App</h1>
+      <div class="container">
+        <div class="speedometer">
+          <div class="arc"></div>
+          <div class="needle" id="needle"></div>
+          <div class="ticks-container" id="ticksContainer"></div>
+        </div>
+        <div class="scaleContainer">
+          <div class="scaleWrapper">
+            <input
+              type="range"
+              id="scaleInput"
+              min="0"
+              max="180"
+              value="0"
+              step="1"
+              class="verticalScale"
+            />
+            <div class="scaleLabels">
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">180</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">150</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">120</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">90</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">60</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">30</span>
+              </div>
+              <div class="labelWrapper">
+                <span class="scaleTick"></span>
+                <span class="scaleLabel">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="inputContainer">
         <input
@@ -23,17 +68,6 @@
           placeholder="Enter speed (0-180)"
         />
         <button id="submitBtn">Submit</button>
-      </div>
-      <div class="scaleContainer">
-        <input
-          type="range"
-          id="scaleInput"
-          min="0"
-          max="180"
-          value="0"
-          step="30"
-          class="verticalScale"
-        />
       </div>
     </main>
     <script type="module" src="app.js"></script>

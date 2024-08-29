@@ -16,10 +16,12 @@ const createTicks = () => {
   const radiiTick = 135;
   const radiiLabel = 120;
 
-  const calculatePosition = (radius, radians) => ({
-    x: center + radius * Math.cos(radians),
-    y: center + radius * Math.sin(radians),
-  });
+  const calculatePosition = (radius, radians) => {
+    return {
+      x: center + radius * Math.cos(radians),
+      y: center + radius * Math.sin(radians),
+    };
+  };
 
   for (let i = 0; i <= totalMarks; i++) {
     const angle = startAngle + i * angleStep;
@@ -91,7 +93,7 @@ const rotateNeedle = (input) => {
   const angle = (value - 0) * (270 / 180) - 135;
 
   needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${
-    angle + 0.2
+    angle === -135 ? angle + 0.6 : angle + 0.1
   }deg)`;
 };
 
