@@ -11,9 +11,8 @@ const createTicks = () => {
   const angleStep = 270 / totalMarks;
 
   const radii = {
-    arc: 145,
-    tick: 132.5,
-    label: 115,
+    tick: 135,
+    label: 120,
   };
 
   const center = 150; // center coordinates
@@ -64,7 +63,9 @@ const rotateNeedle = () => {
   const value = Math.min(Math.max(Number(input), 0), 180);
   const angle = (value - 0) * (270 / 180) - 135;
 
-  needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${angle}deg)`;
+  needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${
+    angle + 0.3
+  }deg)`;
 };
 
 createTicks();
