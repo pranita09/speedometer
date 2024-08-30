@@ -49,7 +49,7 @@ h1 {
 
 .needle {
   position: absolute;
-  width: 3px;
+  width: 2px;
   height: 145px;
   background-color: red;
   transform-origin: 50% 100%;

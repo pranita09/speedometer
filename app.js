@@ -76,7 +76,7 @@ const createTicks = () => {
             subTickEnd.y - subTickStart.y
           )}px`,
           transform: `rotate(${subTickAngle}deg)`,
-          left: `${subTickStart.x}px`,
+          left: `${subTickStart.x + 1}px`,
           top: `${subTickStart.y}px`,
           position: "absolute",
           transformOrigin: "0 0",
@@ -93,7 +93,7 @@ const rotateNeedle = (input) => {
   const angle = (value - 0) * (270 / 180) - 135;
 
   needle.style.transform = `translateX(-50%) translateY(-100%) rotate(${
-    angle === -135 ? angle + 0.6 : angle + 0.1
+    angle === -135 ? angle + 0.6 : angle + 0.39
   }deg)`;
 };
 
